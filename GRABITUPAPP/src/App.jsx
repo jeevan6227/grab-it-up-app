@@ -9,214 +9,164 @@ const [search,setSearch] = useState("")
 const [category,setCategory] = useState("All")
 const [selected,setSelected] = useState(null)
 const [cart,setCart] = useState([])
-const [aiDish,setAiDish] = useState("")
-const [aiRecipe,setAiRecipe] = useState(null)
+const [orders,setOrders] = useState([])
 
 const recipes = [
 
 {
-name:"Biryani",
+name:"Chicken Biryani",
 category:"Lunch",
-image:"https://images.unsplash.com/photo-1563379091339-03246963d51a",
+image:"https://biriyanizone.com/images/763x848_img1.png",
 ingredients:[
 {name:"Rice",price:80},
 {name:"Chicken",price:220},
-{name:"Masala",price:40}
+{name:"Spices",price:40}
 ],
-steps:["Cook rice","Cook chicken","Mix together"]
+steps:[
+"Wash rice",
+"Cook chicken masala",
+"Mix rice and chicken",
+"Cook for 10 minutes"
+]
 },
 
 {
-name:"Dosa",
+name:"Masala Dosa",
 category:"Breakfast",
-image:"https://images.unsplash.com/photo-1630383249896-424e482df921",
+image:"https://hellotempayy.com/cdn/shop/articles/masala_dosa_1.jpg?v=1669795854",
 ingredients:[
-{name:"Batter",price:50},
-{name:"Oil",price:20}
+{name:"Dosa Batter",price:50},
+{name:"Potato",price:30}
 ],
-steps:["Prepare batter","Cook dosa"]
+steps:[
+"Prepare batter",
+"Cook dosa",
+"Add potato masala"
+]
 },
 
 {
 name:"Idli",
 category:"Breakfast",
-image:"https://images.unsplash.com/photo-1589308078059-be1415eab4c3",
+image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQycAfCHffce6BXb4PrdLqifaFT60HKH5Fa8w",
 ingredients:[
 {name:"Rice",price:40},
-{name:"Urad Dal",price:30}
+{name:"Dal",price:30}
 ],
-steps:["Steam idli"]
-},
-
-{
-name:"Paneer Butter Masala",
-category:"Dinner",
-image:"https://images.unsplash.com/photo-1603894584373-5ac82b2ae398",
-ingredients:[
-{name:"Paneer",price:120},
-{name:"Butter",price:40}
-],
-steps:["Cook gravy","Add paneer"]
-},
-
-{
-name:"Pav Bhaji",
-category:"Snacks",
-image:"https://images.unsplash.com/photo-1601050690597-df0568f70950",
-ingredients:[
-{name:"Vegetables",price:60}
-],
-steps:["Cook vegetables"]
-},
-
-{
-name:"Chapati",
-category:"Dinner",
-image:"https://images.unsplash.com/photo-1625944525903-b46d4c27f4fb",
-ingredients:[
-{name:"Flour",price:40}
-],
-steps:["Make dough","Cook"]
-},
-
-{
-name:"Poori",
-category:"Breakfast",
-image:"https://images.unsplash.com/photo-1626074353765-517a681e40be",
-ingredients:[
-{name:"Flour",price:40}
-],
-steps:["Deep fry"]
-},
-
-{
-name:"Upma",
-category:"Breakfast",
-image:"https://images.unsplash.com/photo-1625943553852-781c6dd46b5c",
-ingredients:[
-{name:"Rava",price:40}
-],
-steps:["Cook"]
+steps:[
+"Prepare batter",
+"Steam idli",
+"Serve hot"
+]
 },
 
 {
 name:"Fried Rice",
 category:"Lunch",
-image:"https://images.unsplash.com/photo-1603133872878-684f208fb84b",
+image:"https://cookingfromheart.com/wp-content/uploads/2016/02/Veg-Fried-Rice-4-500x500.jpg",
 ingredients:[
-{name:"Rice",price:50}
+{name:"Rice",price:50},
+{name:"Vegetables",price:30}
 ],
-steps:["Cook"]
+steps:[
+"Cook rice",
+"Fry vegetables",
+"Mix together"
+]
 },
 
 {
 name:"Noodles",
 category:"Snacks",
-image:"https://images.unsplash.com/photo-1612929633738-8fe44f7ec841",
+image:"https://images.getrecipekit.com/20241008094433-blog-20templates-20-3.webp",
 ingredients:[
 {name:"Noodles",price:40}
 ],
-steps:["Boil"]
+steps:[
+"Boil noodles",
+"Add vegetables",
+"Cook"
+]
 },
 
 {
 name:"Chicken Curry",
 category:"Dinner",
-image:"https://images.unsplash.com/photo-1604908812779-5fcb0c8a0e7a",
+image:"https://burmawalakitchen.com/wp-content/uploads/2024/07/Chicken-Curry-no-onions-1-1024x575.jpg",
 ingredients:[
 {name:"Chicken",price:220}
 ],
-steps:["Cook"]
+steps:[
+"Cook masala",
+"Add chicken",
+"Cook 20 min"
+]
 },
 
 {
-name:"Sambar",
-category:"Lunch",
-image:"https://images.unsplash.com/photo-1617093727343-374698b1b08d",
-ingredients:[
-{name:"Dal",price:50}
-],
-steps:["Cook"]
-},
-
-{
-name:"Rasam",
-category:"Lunch",
-image:"https://images.unsplash.com/photo-1626776876729-bab4369a5a5c",
-ingredients:[
-{name:"Tomato",price:30}
-],
-steps:["Boil"]
-},
-
-{
-name:"Vada",
+name:"Samosa",
 category:"Snacks",
-image:"https://images.unsplash.com/photo-1626776876729-bab4369a5a5c",
+image:"https://c.ndtvimg.com/2023-03/0m65kep_samosa_625x300_10_March_23.jpg",
 ingredients:[
-{name:"Dal",price:40}
+{name:"Potato",price:30}
 ],
-steps:["Fry"]
+steps:[
+"Prepare filling",
+"Fill samosa",
+"Fry"
+]
 },
 
 {
-name:"Pulao",
+name:"Chole Bhature",
 category:"Lunch",
-image:"https://images.unsplash.com/photo-1604908176997-4310b0a74c9d",
+image:"https://sitaramdiwanchand.com/blog/wp-content/uploads/2024/04/Image-1-1-1024x576.webp",
 ingredients:[
-{name:"Rice",price:60}
+{name:"Chole",price:60}
 ],
-steps:["Cook"]
+steps:[
+"Cook chole",
+"Prepare bhature"
+]
 },
 
 {
-name:"Paratha",
-category:"Breakfast",
-image:"https://images.unsplash.com/photo-1601050690117-3f0f4a2c0c8c",
+name:"Rajma",
+category:"Lunch",
+image:"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7dLYNmSz8soMD4hh6Z04Agdxmw5HujeqBRQ&s",
 ingredients:[
-{name:"Flour",price:40}
+{name:"Rajma",price:60}
 ],
-steps:["Cook"]
-},
-
-{
-name:"Maggi",
-category:"Snacks",
-image:"https://images.unsplash.com/photo-1617196034734-26f7c15d9c9d",
-ingredients:[
-{name:"Maggi",price:20}
-],
-steps:["Cook"]
+steps:[
+"Soak rajma",
+"Cook rajma"
+]
 },
 
 {
 name:"Egg Curry",
 category:"Dinner",
-image:"https://images.unsplash.com/photo-1604909053194-7f9a1b8e7c19",
+image:"https://allwaysdelicious.com/wp-content/uploads/2024/12/egg-curry-in-pan-11.jpg",
 ingredients:[
 {name:"Egg",price:60}
 ],
-steps:["Cook"]
+steps:[
+"Boil eggs",
+"Prepare gravy"
+]
 },
 
 {
-name:"Fish Curry",
+name:"Butter Chicken",
 category:"Dinner",
-image:"https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec",
+image:"https://www.licious.in/blog/wp-content/uploads/2020/10/butter-chicken--600x600.jpg",
 ingredients:[
-{name:"Fish",price:200}
+{name:"Chicken",price:240}
 ],
-steps:["Cook"]
-},
-
-{
-name:"Aloo Curry",
-category:"Lunch",
-image:"https://images.unsplash.com/photo-1604908177522-040e7b0c60e0",
-ingredients:[
-{name:"Potato",price:40}
-],
-steps:["Cook"]
+steps:[
+"Cook chicken",
+"Prepare butter gravy"
+]
 }
 
 ]
@@ -225,7 +175,7 @@ const handleLogin=()=>{
 if(user){
 setLogin(true)
 }else{
-alert("Enter name")
+alert("Enter Name")
 }
 }
 
@@ -238,76 +188,52 @@ const addToCart=(item)=>{
 setCart([...cart,item])
 }
 
-const total = cart.reduce((sum,item)=>sum+item.price,0)
+const removeFromCart=(index)=>{
+setCart(cart.filter((_,i)=>i!==index))
+}
 
-const buyItem=(name)=>{
-window.open(`https://www.bigbasket.com/ps/?q=${name}`,"_blank")
+const buyItem=(item)=>{
+setOrders([...orders,item])
 }
 
 const buyAll=()=>{
-cart.forEach(item=>{
-window.open(`https://www.bigbasket.com/ps/?q=${item.name}`,"_blank")
-})
+setOrders([...orders,...cart])
+setCart([])
 }
 
-const generateAI=()=>{
-
-const generated={
-name:aiDish,
-image:`https://source.unsplash.com/400x300/?${aiDish}`,
-ingredients:[
-{name:"Main Ingredient",price:80},
-{name:"Spices",price:40}
-],
-steps:["Prepare","Cook","Serve"]
-}
-
-setAiRecipe(generated)
-
-}
+const total = cart.reduce((sum,item)=>sum+item.price,0)
 
 if(!login){
-
 return(
-
 <div className="login">
-
-<h1>Indian Recipe App</h1>
-
-<input
-placeholder="Enter Name"
-onChange={(e)=>setUser(e.target.value)}
-/>
-
-<button onClick={handleLogin}>
-Login
-</button>
-
+<h1>🍛 Recipe App</h1>
+<input placeholder="Enter Name" onChange={(e)=>setUser(e.target.value)} />
+<button onClick={handleLogin}>Login</button>
 </div>
-
 )
-
 }
 
 return(
 
 <div className="container">
 
-<h1>Indian Recipes</h1>
+<h1>Explore Dishes</h1>
 
-<input
+<div className="searchBox">
+
+<input 
 className="search"
 placeholder="Search Dish"
 onChange={(e)=>setSearch(e.target.value)}
 />
 
-<div className="category">
-
-<button onClick={()=>setCategory("All")}>All</button>
-<button onClick={()=>setCategory("Breakfast")}>Breakfast</button>
-<button onClick={()=>setCategory("Lunch")}>Lunch</button>
-<button onClick={()=>setCategory("Dinner")}>Dinner</button>
-<button onClick={()=>setCategory("Snacks")}>Snacks</button>
+<select onChange={(e)=>setCategory(e.target.value)}>
+<option>All</option>
+<option>Breakfast</option>
+<option>Lunch</option>
+<option>Dinner</option>
+<option>Snacks</option>
+</select>
 
 </div>
 
@@ -331,28 +257,15 @@ View Recipe
 
 </div>
 
-<div className="ai">
-
-<h2>AI Recipe Generator</h2>
-
-<input
-placeholder="Enter Dish"
-onChange={(e)=>setAiDish(e.target.value)}
-/>
-
-<button onClick={generateAI}>
-Generate
-</button>
-
-</div>
-
 {selected && (
 
 <div className="recipe">
 
 <h2>{selected.name}</h2>
 
-<img src={selected.image}/>
+<img src={selected.image} alt="dish"/>
+
+<h3>Ingredients</h3>
 
 {selected.ingredients.map((i,index)=>(
 
@@ -360,15 +273,21 @@ Generate
 
 <p>{i.name} ₹{i.price}</p>
 
-<button onClick={()=>addToCart(i)}>
-Add
-</button>
+<button onClick={()=>addToCart(i)}>Add</button>
 
-<button onClick={()=>buyItem(i.name)}>
-Buy
-</button>
+<button onClick={()=>buyItem(i)}>Buy</button>
 
 </div>
+
+))}
+
+<h3>Steps</h3>
+
+{selected.steps.map((step,index)=>(
+
+<p key={index}>
+{index+1}. {step}
+</p>
 
 ))}
 
@@ -382,17 +301,35 @@ Buy
 
 {cart.map((item,index)=>(
 
-<p key={index}>
-{item.name} ₹{item.price}
-</p>
+<div key={index}>
+
+<p>{item.name} ₹{item.price}</p>
+
+<button onClick={()=>removeFromCart(index)}>
+Remove
+</button>
+
+</div>
 
 ))}
 
 <h3>Total ₹{total}</h3>
 
-<button onClick={buyAll}>
-Buy All
-</button>
+<button onClick={buyAll}>Buy All</button>
+
+</div>
+
+<div className="orders">
+
+<h2>Orders</h2>
+
+{orders.map((item,index)=>(
+
+<p key={index}>
+{item.name} ₹{item.price}
+</p>
+
+))}
 
 </div>
 
